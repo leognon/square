@@ -13,7 +13,7 @@ class HelpPopup {
       "P: Play/Pause",
       "I: Invert Controls (OFF)",
       "C: Cheats (OFF)",
-      "T: Skip 10 seconds",
+      "T: Instant Reset",
       "H: Toggle Help",
       "",
       "Click to close"

@@ -10,7 +10,7 @@ A rhythm-based geometric puzzle game where you time arrow key presses to match w
    - **H**: Toggle help screen
    - **I**: Invert controls (only when help is visible)
    - **C**: Enable cheats/auto-play (only when help is visible)
-   - **T**: Skip 10 seconds ahead
+   - **T**: Instant reset (explode and restart level)
    - **Click level title**: Cycle between levels (Mario, Tetris, Megalovania)
    - **Click ? button**: Show/hide help
 
@@ -31,3 +31,5 @@ A rhythm-based geometric puzzle game where you time arrow key presses to match w
 Inspired by https://www.youtube.com/shorts/y3uKmB7ms-U.
 
 Built for final project of MIT's Interactive Music Systems (21M.385).
+The original version was written in python with Kivy.
+This version was built almost entirely by Claude Code converting the python version!

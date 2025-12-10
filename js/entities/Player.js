@@ -206,20 +206,7 @@ class Player {
 
       // Check for game over
       if (this.lives <= 0) {
-        // Set up reset animation
-        this.resetStartTime = this.time;
-        this.resettingUntil = this.time + DEATH_RESET_TIME;
-        this.deathPosition = [this.x, this.y];
-        this.lastBouncePt = [this.x, this.y];
-        this.lastBounceTime = this.time;
-
-        // Trigger game over state
-        this.game.gameOver();
-
-        // Spawn particles
-        const [screenX, screenY] = camera.worldToScreen(this.x, this.y, this.time);
-        const particle = new ParticleEffect(screenX, screenY, 255, 0, 0, 3);
-        this.particles.push(particle);
+        this.triggerDeath(camera);
       } else {
         this.nextGemIdx += 1;
         if (nextGemHv === HORZ) {
@@ -234,6 +221,26 @@ class Player {
 
     // Update particles
     this.particles = this.particles.filter(p => p.update(deltaTime / 1000));
+  }
+
+  triggerDeath(camera, currentTime = null, resetDuration = DEATH_RESET_TIME) {
+    // Use provided time or player's current time
+    const time = currentTime !== null ? currentTime : this.time;
+
+    // Set up reset animation
+    this.resetStartTime = time;
+    this.resettingUntil = time + resetDuration;
+    this.deathPosition = [this.x, this.y];
+    this.lastBouncePt = [this.x, this.y];
+    this.lastBounceTime = time;
+
+    // Trigger game over state
+    this.game.gameOver();
+
+    // Spawn particles
+    const [screenX, screenY] = camera.worldToScreen(this.x, this.y, time);
+    const particle = new ParticleEffect(screenX, screenY, 255, 0, 0, 3);
+    this.particles.push(particle);
   }
 
   updateTrail() {

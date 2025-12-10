@@ -31,7 +31,7 @@ class InputManager {
     if (lowerKey === 'p') {
       this.game.togglePlay();
     } else if (lowerKey === 't') {
-      this.game.skipTime();
+      this.game.instantReset();
     } else if (lowerKey === 'i') {
       this.game.toggleInvertControls();
     } else if (lowerKey === 'c') {

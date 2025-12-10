@@ -101,8 +101,8 @@ class Game {
       gem.reset();
     }
 
-    this.setScore(0);
-    this.setCombo(0);
+    // Don't reset score/combo - they persist to show final score
+    // (only reset when starting a new game via togglePlay)
     this.setLives(this.player.lives);
     this.audioController.unmute();
   }
@@ -129,9 +129,13 @@ class Game {
     this.audioController.toggle();
   }
 
-  skipTime() {
+  instantReset() {
     if (this.state === GameState.PLAYING) {
-      this.audioController.skip();
+      // Set lives to 0 and trigger death with fast animation (250ms)
+      this.player.lives = 0;
+      this.setLives(0);
+      const currentTime = this.audioController.getTime();
+      this.player.triggerDeath(this.camera, currentTime, 0.25);
     }
   }
 
@@ -232,10 +236,8 @@ class Game {
       this.player.render(this.camera, time);
     }
 
-    // Render HUD
-    if (this.state === GameState.PLAYING) {
-      this.hud.render();
-    }
+    // Render HUD (always visible so player can see their score)
+    this.hud.render();
 
     // Render start screen UI
     if (this.state === GameState.START) {
@@ -253,8 +255,15 @@ class Game {
       this.levelBoxW = textW + boxPadding * 2;
       this.levelBoxH = textH + boxPadding * 2;
 
-      // Draw box
+      // Draw box with double border (black outside, white inside)
       noFill();
+
+      // Black outer border
+      stroke(0);
+      strokeWeight(6);
+      rect(this.levelBoxX, this.levelBoxY, this.levelBoxW, this.levelBoxH);
+
+      // White inner border
       stroke(255);
       strokeWeight(2);
       rect(this.levelBoxX, this.levelBoxY, this.levelBoxW, this.levelBoxH);
@@ -274,7 +283,8 @@ class Game {
       noStroke();
       ellipse(this.helpButtonX, this.helpButtonY, this.helpButtonRadius * 2);
 
-      this.helpButtonLabel.setPosition(this.helpButtonX, this.helpButtonY);
+      // Offset Y slightly for better visual centering with stroke
+      this.helpButtonLabel.setPosition(this.helpButtonX, this.helpButtonY - 6);
       this.helpButtonLabel.render();
     }
 
