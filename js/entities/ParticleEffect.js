@@ -6,7 +6,7 @@ class ParticleEffect {
     this.time = 0;
     this.alive = true;
 
-    const numParticles = Math.floor(10 * scale);
+    const numParticles = Math.floor(20 * scale);
     for (let i = 0; i < numParticles; i++) {
       const angle = random(TWO_PI);
       const speed = random(200, 400);

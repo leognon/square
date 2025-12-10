@@ -41,8 +41,8 @@ class Game {
     this.levelLabel = new OutlinedLabel("", 60);
     this.startHint = new OutlinedLabel("Press P to start", 32);
     this.highScoreLabel = new OutlinedLabel("", 32);
-    this.helpButtonLabel = new OutlinedLabel("?", 60);
-    this.helpButtonRadius = 40;
+    this.helpButtonLabel = new OutlinedLabel("?", 48);
+    this.helpButtonRadius = 32;
     this.helpButtonX = 0;
     this.helpButtonY = 0;
     this.levelBoxX = 0;
