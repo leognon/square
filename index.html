@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soothing Square</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- p5.js Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
+
+  <!-- Prevent browser/extension interference with arrow keys -->
+  <script>
+    document.addEventListener('keydown', function(e) {
+      // Prevent default for arrow keys to avoid browser/extension interference
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault();
+      }
+    }, { capture: true });
+  </script>
+</head>
+<body>
+  <!-- p5.js canvas will be inserted here -->
+
+  <!-- Load JS modules in dependency order -->
+  <script src="js/generation/BouncePoint.js"></script>
+  <script src="js/generation/generator.js"></script>
+  <script src="js/levels/levelData.js"></script>
+  <script src="js/world/Level.js"></script>
+  <script src="js/world/PlayArea.js"></script>
+  <script src="js/core/Camera.js"></script>
+  <script src="js/core/InputManager.js"></script>
+  <script src="js/entities/ParticleEffect.js"></script>
+  <script src="js/entities/GemDisplay.js"></script>
+  <script src="js/entities/Player.js"></script>
+  <script src="js/audio/AudioController.js"></script>
+  <script src="js/ui/OutlinedLabel.js"></script>
+  <script src="js/ui/HelpPopup.js"></script>
+  <script src="js/ui/HUD.js"></script>
+  <script src="js/core/Game.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>
