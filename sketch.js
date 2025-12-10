@@ -7,7 +7,7 @@ let deathSound;
 // Preload assets
 function preload() {
   customFont = loadFont('assets/fonts/upheavtt.ttf');
-  deathSound = loadSound('assets/audio/death_sound.wav');
+  deathSound = new Audio('assets/audio/death_sound.wav');
 }
 
 function setup() {
