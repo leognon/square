@@ -3,6 +3,7 @@ const SQUARE_SIZE = 0.1;  // Relative size (matches generator.py)
 const SLOP = 0.1;  // 100ms timing window (latency compensated in AudioController)
 const INVINCIBILITY_WINDOW = 1.0;  // 1 second grace period
 const DEATH_RESET_TIME = 2.0;  // Time to animate back to start after death
+const WIN_RESET_TIME = 4.0;  // Time to animate back to start after winning
 
 // Interpolation helper
 function interp(t0, t1, v0, v1, t) {
@@ -153,9 +154,20 @@ class Player {
     const [nextGemTime, nextGemHv] = this.gems[this.nextGemIdx];
 
     if (this.nextGemIdx === this.gems.length - 1 && this.time >= nextGemTime) {
-      // Level complete
+      // Level complete - trigger victory animation
       this.x = this.bouncePoints[this.nextGemIdx].pt.x;
       this.y = this.bouncePoints[this.nextGemIdx].pt.y;
+
+      // Set up reset animation (like death but with green particles)
+      this.resetStartTime = this.time;
+      this.resettingUntil = this.time + WIN_RESET_TIME;
+      this.deathPosition = [this.x, this.y];
+      this.lastBouncePt = [this.x, this.y];
+      this.lastBounceTime = this.time;
+
+      // Mute audio and trigger resetting state
+      this.game.audioController.mute();
+      this.game.state = GameState.RESETTING;
       return;
     } else {
       let startX, startY, startTime;

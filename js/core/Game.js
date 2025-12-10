@@ -229,6 +229,11 @@ class Game {
       this.player.updateResetting(time);
       this.player.getCameraOffset(this.camera);
       this.camera.update(time);
+
+      // Update gem displays to animate particles
+      for (const gem of this.gemDisplays) {
+        gem.update(dt);
+      }
     }
   }
 
