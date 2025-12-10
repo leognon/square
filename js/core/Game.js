@@ -28,10 +28,19 @@ class Game {
     // Game settings
     this.invertControls = false;
     this.cheatsEnabled = false;
+    this.highScores = [0, 0, 0]; // High scores for each level
+
+    // Load saved settings
+    this.loadSettings();
+
+    // Update help popup with loaded settings
+    this.helpPopup.updateInvertText(this.invertControls);
+    this.helpPopup.updateCheatsText(this.cheatsEnabled);
 
     // UI elements for start screen
     this.levelLabel = new OutlinedLabel("", 60);
     this.startHint = new OutlinedLabel("Press P to start", 32);
+    this.highScoreLabel = new OutlinedLabel("", 32);
     this.helpButtonLabel = new OutlinedLabel("?", 60);
     this.helpButtonRadius = 40;
     this.helpButtonX = 0;
@@ -88,6 +97,9 @@ class Game {
   }
 
   reset() {
+    // Check for high score before resetting
+    this.updateHighScore(this.currentLevelIdx, this.player.score);
+
     this.state = GameState.START;
     this.player.reset();
     this.player.lives = this.levels[this.currentLevelIdx].numLives;
@@ -143,6 +155,7 @@ class Game {
     if (this.helpPopup.visible) {
       this.invertControls = !this.invertControls;
       this.helpPopup.updateInvertText(this.invertControls);
+      this.saveSettings();
     }
   }
 
@@ -150,6 +163,7 @@ class Game {
     if (this.helpPopup.visible) {
       this.cheatsEnabled = !this.cheatsEnabled;
       this.helpPopup.updateCheatsText(this.cheatsEnabled);
+      this.saveSettings();
     }
   }
 
@@ -275,6 +289,12 @@ class Game {
       this.startHint.setPosition(width / 2, height - 80);
       this.startHint.render();
 
+      // High score
+      const highScore = this.highScores[this.currentLevelIdx];
+      this.highScoreLabel.setText(`High Score: ${highScore}`);
+      this.highScoreLabel.setPosition(width / 2, height - 200);
+      this.highScoreLabel.render();
+
       // Help button
       this.helpButtonX = width - 60;
       this.helpButtonY = height - 60;
@@ -290,5 +310,43 @@ class Game {
 
     // Render help popup (on top of everything)
     this.helpPopup.render();
+  }
+
+  loadSettings() {
+    try {
+      // Load settings from localStorage
+      const saved = localStorage.getItem('soothingSquareSettings');
+      if (saved) {
+        const settings = JSON.parse(saved);
+        this.invertControls = settings.invertControls || false;
+        this.cheatsEnabled = settings.cheatsEnabled || false;
+        this.highScores = settings.highScores || [0, 0, 0];
+      }
+    } catch (e) {
+      console.error('Failed to load settings:', e);
+    }
+  }
+
+  saveSettings() {
+    try {
+      // Save settings to localStorage
+      const settings = {
+        invertControls: this.invertControls,
+        cheatsEnabled: this.cheatsEnabled,
+        highScores: this.highScores
+      };
+      localStorage.setItem('soothingSquareSettings', JSON.stringify(settings));
+    } catch (e) {
+      console.error('Failed to save settings:', e);
+    }
+  }
+
+  updateHighScore(levelIdx, score) {
+    if (score > this.highScores[levelIdx]) {
+      this.highScores[levelIdx] = score;
+      this.saveSettings();
+      return true; // New high score!
+    }
+    return false;
   }
 }
