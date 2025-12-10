@@ -34,14 +34,14 @@ class HUD {
   }
 
   render() {
-    // Position labels at top of screen
+    // Position labels at top of screen with fixed margins to prevent overlap
     this.scoreLabel.setPosition(width / 2, 50);
     this.scoreLabel.render();
 
-    this.comboLabel.setPosition(width / 4, 50);
+    this.comboLabel.setPosition(150, 50);  // Fixed left position
     this.comboLabel.render();
 
-    this.livesLabel.setPosition(3 * width / 4, 50);
+    this.livesLabel.setPosition(width - 150, 50);  // Fixed right position
     this.livesLabel.render();
   }
 }

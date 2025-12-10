@@ -74,6 +74,16 @@ class Camera {
   }
 
   reset() {
+    // Reset timing variables but preserve reflection state
+    this.prevReflectH = this.reflectH;
+    this.prevReflectV = this.reflectV;
+    this.lastFrameReflectH = this.reflectH;
+    this.lastFrameReflectV = this.reflectV;
+    this.lastFlipTime = -100;
+  }
+
+  resetReflections() {
+    // Full reset including reflection state (used when switching levels)
     this.reflectH = false;
     this.reflectV = false;
     this.prevReflectH = false;

@@ -79,7 +79,7 @@ class Game {
       currentLevel.bouncePoints
     );
 
-    this.camera.reset();
+    this.camera.resetReflections();
 
     // Center camera on player at start
     this.player.getCameraOffset(this.camera);

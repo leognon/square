@@ -315,8 +315,7 @@ class Player {
     this.trail = [];
     this.particles = [];
 
-    // Reset reflection state
-    this.reflectH = false;
-    this.reflectV = false;
+    // Don't reset reflection state - it persists within a level
+    // (only reset when switching levels via resetReflections())
   }
 }
