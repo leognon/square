@@ -290,8 +290,19 @@ class Game {
       // Draw label
       this.levelLabel.render();
 
-      // Start hint
-      this.startHint.setPosition(width / 2, height - 80);
+      // Start hint - position above player with proper spacing
+      const hintFontSize = 24;
+      textSize(hintFontSize);
+      const hintWidth = textWidth("Press P to start");
+      const textHeight = textAscent() + textDescent();
+
+      // Position with left edge at player's left edge, extending right
+      const worldX = this.player.x + hintWidth / 2 - this.player.size / 2;
+      const worldY = this.player.y - this.player.size / 2 - textHeight / 2 - 10;
+      const [screenX, screenY] = this.camera.worldToScreen(worldX, worldY, 0);
+
+      this.startHint.fontSize = hintFontSize;
+      this.startHint.setPosition(screenX, screenY);
       this.startHint.render();
 
       // High score

@@ -59,7 +59,7 @@ class GemDisplay {
     // Only create particle effect if not autoplayed (during invincibility or cheats)
     if (!autoplayed) {
       const [screenX, screenY] = camera.worldToScreen(this.x, this.y, time);
-      const particle = new ParticleEffect(screenX, screenY, 255, 0, 0, 1);  // Red particles
+      const particle = new ParticleEffect(screenX, screenY, 33, 0, 204, 1);
       this.particles.push(particle);
     }
 
