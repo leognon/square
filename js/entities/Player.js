@@ -165,8 +165,6 @@ class Player {
       this.lastBouncePt = [this.x, this.y];
       this.lastBounceTime = this.time;
 
-      // Mute audio and trigger resetting state
-      this.game.audioController.mute();
       this.game.state = GameState.RESETTING;
       return;
     } else {
