@@ -11,9 +11,9 @@ class Game {
 
     // Create Level instances
     this.levels = [
-      new Level("Mario", "assets/audio/GroundThemeShortened.wav", marioWith35, 3),
-      new Level("Tetris", "assets/audio/tetris_shortened.wav", tetrisWith25, 5),
-      new Level("Megalovania", "assets/audio/megalovania_shortened.wav", megWith13, 10)
+      new Level("Mario", "assets/audio/GroundThemeShortened.wav", marioWith35, 5),
+      new Level("Tetris", "assets/audio/tetris_shortened.wav", tetrisWith25, 8),
+      new Level("Megalovania", "assets/audio/megalovania_shortened.wav", megWith13, 13)
     ];
 
     this.state = GameState.START;
