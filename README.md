@@ -1,5 +1,7 @@
 # Soothing Square
 
+leognon.com/square
+
 A rhythm-based geometric puzzle game where you time arrow key presses to match when a red square bounces off walls, synchronized to music.
 
 ## How to Play
